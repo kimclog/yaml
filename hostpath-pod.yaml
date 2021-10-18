@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-mount-container
+spec:
+  containers:
+    - name: hostpath-mount-container
+      image: busybox
+      args: [ "tail", "-f", "/dev/null" ]
+      volumeMounts:
+      - name: hostpath-volume
+        mountPath: /mnt
+  volumes:
+  - name : hostpath-volume
+    persistentVolumeClaim:
+      claimName: hostpath-pvc    # 3. hostpath-pvc라는 이름의 pvc를 사용합니다.
